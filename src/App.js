@@ -16,9 +16,9 @@ import Section from "./components/Section";
             bad: 0,
         }
 
-        onClick = stateName => {
+        onClick = Name => {
             this.setState(prevState => ({
-                [stateName]: prevState[stateName] + 1,
+                [Name]: prevState[Name] + 1,
             }));
         };
         totalFeedback = () =>
