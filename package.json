@@ -11,6 +11,7 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },
+  "homepage": "https://igorgnatiuk1.github.io/goit-react-hw-02-feedback/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

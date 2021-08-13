@@ -15,25 +15,23 @@ import Section from "./components/Section";
             neutral: 0,
             bad: 0,
         }
-        totalFeedback = ({ good, neutral, bad } = this.state) =>
-            good + neutral + bad;
-        positiveFeedback = ({good} = this.state, total = this.totalFeedback()) =>
-            good * 100 / total;
-        onClickGood = () => {
+
+        onClick = stateName => {
             this.setState(prevState => ({
-                good: prevState.good +1,
-            }))
-        }
-        onClickBad = () => {
-            this.setState(prevState => ({
-                bad: prevState.bad +1,
-            }))
-        }
-        onClickNeutral = () => {
-            this.setState(prevState => ({
-                neutral: prevState.neutral +1,
-            }))
-        }
+                [stateName]: prevState[stateName] + 1,
+            }));
+        };
+        totalFeedback = () =>
+            Object.values(this.state).reduce(
+                (total, stateQuantity) => total + stateQuantity,
+                0,
+            );
+
+        positiveFeedback = () =>
+            this.totalFeedback()
+                ? Math.round((this.state.good * 100) / this.totalFeedback())
+                : 0;
+
 
 
 
@@ -46,9 +44,9 @@ import Section from "./components/Section";
                 < Section title = {'Please leave feedback'}>
 
                     <FeedbackOptions
-                        clickGood = {this.onClickGood}
-                        clickBad = {this.onClickBad}
-                        clickNeutral ={this.onClickNeutral}
+                        clickButton = {this.onClick}
+                        options = { ['good', 'bad', 'neutral']}
+
 
                     />
 
@@ -79,9 +77,9 @@ import Section from "./components/Section";
      title: PropTypes.string.isRequired
  }
  FeedbackOptions.propTypes = {
-        clickGood: PropTypes.func.isRequired,
-     clickBad: PropTypes.func.isRequired,
-     clickNeutral: PropTypes.func.isRequired
+        clickButton: PropTypes.func.isRequired,
+        options: PropTypes.array.isRequired
+
  }
  Statistics.propTypes = {
         good: PropTypes.number.isRequired,
